@@ -1,23 +1,24 @@
-
-import createStore from 'redux-zero'
-
-const COMMENT = [
-    
-  ]
+import createStore from "redux-zero";
 
 const initialState = {
-   successSignIn : false,
-   user : {
-      id : null,
-      email :  null,
-      firstname :  null,
-      lastname :  null,
-      passwordConf :  null           
-   },
-   stages: [ ],
-   tasks: [ ],
-   comments : COMMENT
-}
+  stages: [],
+  tasks: [] ,
+  successLogin: false,
+  user : 
+    {
+    firstName: null,
+    lastName: null,
+    email: null,
+    password: null,
+    confirmPassword: null,
+    stages : null,
 
-const store = createStore (initialState);
-export default store
+ 
+  },
+  boards: null,
+  selectItem: -1,
+  selectCard: -1
+};
+
+const store = createStore(initialState);
+export default store;

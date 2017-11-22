@@ -1,87 +1,89 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { connect } from "redux-zero/react";
+import "./App.css";
 import { NavLink, Redirect } from 'react-router-dom';
+import { SignIn } from "./SignIn";
+import Board from './Board';
+import Home from './Home';
+import { SignUpAdd } from "./actions";
+import {Header1} from './SignIn'
 
-import { connect } from 'redux-zero/react'
-import { signIn, signOut, signUp } from './actions'
-import './App.css';
-import logo from './download.png'
+const Footer = () => {
+  return (
+    <div className="footer">
+      <footer>
+        <small>
+          <a href="https://trello.com/" target="_blank">
+            Trello
+          </a>{" "}
+          tribute for educational purposes crafted with ♥ for{" "}
+          <a href="https://diacode.com/">Diacode</a>
+          by <a href="https://twitter.com/bigardone">@bigardone</a>
+        </small>
+      </footer>
+    </div>
+  );
+};
+const Header = () => {
+  return (
+    <header>
+      <div className="logo" />
+    </header>
+  );
+};
 
-const SignUp = ({ successSignUp }) => {
-    return (
-        <main id="main_container" role="main">
-            <div data-reactid=".0">
-                <div
-                    className="view-container registrations new"
-                    data-reactid=".0.0">
-                    <main data-reactid=".0.0.0">
-                        <header data-reactid=".0.0.0.0">
-                            <img src={logo} />
-                        </header>
+const SignUp = ({ successLogin, user }) => {
+  return (
+    <div>
+         {successLogin && <Redirect to='/home' />}
+            <Header1 />
+            <form
+              onSubmit={e => {
+                e.preventDefault();
+                SignUpAdd(
+                  this.firstNameRef.value,
+                  this.lastNameRef.value,
+                  this.emailRef.value,
+                  this.passwordRef.value
+                );
+              }}
+            >
+                  <input
+                    ref={e => (this.firstNameRef = e)}
+                    className="input"
+                    type="text"
+                    placeholder="First name"
+                  />
+                  <input
+                    ref={e => (this.lastNameRef = e)}
+                    className="input"
+                    type="text"
+                    placeholder="Last name"
+                  />
+                  <input
+                    ref={e => (this.emailRef = e)}
+                    className="input"
+                    type="email"
+                    placeholder="Email"
+                  />
+                  <input
+                    ref={e => (this.passwordRef = e)}
+                    className="input"
+                    type="password"
+                    placeholder="password"
+                  />
+              <button type="submit" className="button">
+                Sign Up
+              </button>
+          <NavLink to='/signin' className="transparent">
+                sign in
+            </NavLink>
+            </form>
+        <Footer />
+    </div>
+  );
+};
 
-                        {
-                            successSignUp && <Redirect to="/home" />
-                        }
-                        <form 
-                        id="sign_up_form" 
-                        data-reactid=".0.0.0.1"
-                        onSubmit={
-                            e => {
-                                e.preventDefault();
-                                signUp(this.firstNameRef.value, this.lastNameRef.value, this.emailRef.value, this.passwordRef.value)
-                            }
-                        }>
-                            <input placeholder="First Name" 
-                            id="user_first_name"
-                            type="text"
-                            ref={e => this.firstNameRef = e} />
-                            <div className="field" data-reactid=".0.0.0.1.1">
-                                <input
-                                id="user_last_name"
-                                type="text" 
-                                placeholder="Last Name" 
-                                required
-                                data-reactid=".0.0.0.1.1.0"
-                                ref={e => this.lastNameRef = e} />
-                            </div>
-                            <div className="field" data-reactid=".0.0.0.1.1">
-                                <input 
-                                placeholder="Email"
-                                id="user_email"
-                                type="email" 
-                                ref={e => this.emailRef = e} />
-                            </div>
-                            <div className="field" data-reactid=".0.0.0.1.4">
-                                <input 
-                                type="password" 
-                                placeholder="Password" 
-                                ref={e => this.passwordRef = e} />
-                            </div>
-                            {/* <div className="field" data-reactid=".0.0.0.1.4">
-                                <input
-                                id="user_password_confirmation"
-                                type="password"
-                                placeholder="Confirm password"
-                                required
-                                ref={e => this.passwordConfRef = e}
-                                data-reactid=".0.0.0.1.4.0" />
-                            </div> */}
-                            <button type="submit">
-                                Sign Up!
-                            </button>
-                            <div className="field" data-reactid=".0.0.0.1.4">
-                                <NavLink data-reactid=".0.0.0.1.3" to="/signin">
-                                    Sign in
-                                </NavLink>
-                            </div>
-                        </form>
-                    </main>
-                </div>
-            </div>
-        </main>
-    );
-}
+const mapToProps = ({ successLogin, user }) => ({ successLogin, user });
 
-
-const mapToProps = ({ successSignUp }) => ({ successSignUp })
 export default connect(mapToProps)(SignUp);
- 

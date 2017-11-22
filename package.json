@@ -1,11 +1,11 @@
 {
-  "name": "kahoot-survey",
+  "name": "apptrellofirebase",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://dianamariasilva.github.io/sprint6",
   "dependencies": {
     "firebase": "^4.6.2",
     "react": "^16.1.1",
+    "react-bootstrap": "^0.31.5",
     "react-dom": "^16.1.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
@@ -15,11 +15,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  },
-  "devDependencies": {
-    "gh-pages": "^1.1.0"
+    "eject": "react-scripts eject"
   }
 }

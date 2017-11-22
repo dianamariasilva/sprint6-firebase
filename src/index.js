@@ -1,27 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
-import TrelloApp from './TrelloApp';
-import {Provider} from 'redux-zero/react'
-import {HashRouter, Route, Switch} from 'react-router-dom'
-import store from './store'
+// import MusicApp from './App';
 import registerServiceWorker from './registerServiceWorker';
+import {Provider} from 'redux-zero/react'
+import store from './store'
+import SignIn from './SignIn'
+import SignUp from './SignUp'
+import { signIn, signOut, signUp, addNewBoard } from "./actions";
+import { readBoard } from './actions'
+import Home from './Home';
+import Myboard from "./Board";
 
-const Index = () =>  (
-   <Provider store={store}> 
-      <HashRouter>
-         <Switch>
-            <Route name="signin" exact path = "/" component = {SignIn}/>
-            <Route name="signin" exact path = "/signin" component = {SignIn}/>
-            <Route name="signup" exact path = "/signup" component = {SignUp}/>         
-            <Route name="board" exact path = "/board/:id" component = {App}/> 
-         </Switch>
-      </HashRouter>
-   </Provider>
-)
+import { HashRouter, Switch, Route, NavLink, Redirect } from "react-router-dom";
+
+
+const Index = () => (
+  <Provider store={store}>
+    <HashRouter>
+      <Switch>
+        <Route exact path="/" component={SignIn} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/myboard" component={Myboard} />
+      </Switch>
+    </HashRouter>
+  </Provider>
+);
+readBoard();
 
 ReactDOM.render(<Index />, document.getElementById('root'));
 registerServiceWorker();
